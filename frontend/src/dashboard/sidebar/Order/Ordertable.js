@@ -172,7 +172,12 @@ const Ordertable = () => {
   useEffect(() => {
     dispatch(AllOrder()).then((res) => {
       console.log('172:',res);
-      const allOrders = res.payload || [];
+      // const allOrders = res.payload || [];
+      const allOrders = Array.isArray(res?.payload)
+  ? res.payload
+  : Array.isArray(res?.payload?.orders)
+  ? res.payload.orders
+  : [];
       const sentOrderIds = JSON.parse(localStorage.getItem("sent_order_ids")) || [];
   
       // Filter orders that haven't been sent yet
@@ -187,7 +192,8 @@ const Ordertable = () => {
       }
   
       // Update local state regardless
-      setLocalOrders(allOrders);
+      // setLocalOrders(allOrders);
+      setLocalOrders(Array.isArray(allOrders) ? allOrders : []);
     });
   }, [dispatch]);
 
@@ -492,7 +498,8 @@ const downloadCSV = () => {
           </div>
         ) : (
           <Table
-            dataSource={localOrders}
+            //dataSource={localOrders}
+            dataSource={Array.isArray(localOrders) ? localOrders : []}rs
             columns={columns}
             rowKey="_id"
             pagination={false}

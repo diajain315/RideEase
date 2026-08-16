@@ -42,7 +42,7 @@ export const processPayment = async (req, res) => {
       const options = {
         amount: Number(req.body.amount * 100), // Razorpay expects amount in paise
         currency: "INR"
-      };
+      };    
   
       const order = await instance.orders.create(options);
   

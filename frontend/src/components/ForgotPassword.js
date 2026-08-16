@@ -441,6 +441,123 @@
 
 
 
+// import React, { useEffect } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { Formik, ErrorMessage } from "formik";
+// import { Form, Input, Button, Typography, Card } from "antd";
+// import { ValidateEmailOnly } from "./ValidateEmail";
+// import { sendOtp } from "../redux/features/User/authAction";
+// import { clearFields } from "../redux/features/User/authSlice";
+// import Layout from "./Layout";
+// import Spinner from "../Helper/Spinner";
+// import Error from "../Helper/Error";
+
+// const { Title, Text } = Typography;
+
+// const ForgotPassword = () => {
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+//   const { loading, userInfo, error } = useSelector((state) => state.auth);
+
+//   useEffect(() => {
+//     window.scrollTo({ top: 0, behavior: "smooth" });
+//   }, []);
+
+//   useEffect(() => {
+//     if (userInfo) {
+//       dispatch(clearFields());
+//       navigate("/");
+//     } else {
+//       dispatch(clearFields());
+//     }
+//   }, [userInfo, dispatch, navigate]);
+
+//   return (
+//     <Layout title="Bike-4-Rent : Forgot Password">
+//       <div className="flex justify-center items-center min-h-screen bg-slate-100 px-4">
+//         <Card className="w-full max-w-md" bordered={false} style={{ borderRadius: "1rem" }}>
+//           <div className="text-center mb-6">
+//             <Link to="/">
+//               <img
+//                 src="../images/BikeForRentFinalLogo.png"
+//                 alt="Bike For Rent"
+//                 style={{ height: "40px", margin: "0 auto" }}
+//               />
+//             </Link>
+//             <Title level={3} style={{ marginTop: "1rem" }}>
+//               Reset Your Password
+//             </Title>
+//           </div>
+
+//           <Formik
+//             initialValues={{ email: "" }}
+//             validationSchema={ValidateEmailOnly}
+//             onSubmit={async (values) => {
+//               try {
+//                 //await dispatch(sendOtp({ email: values.email }));
+//                 localStorage.setItem("resetEmail", values.email);
+//                 navigate("/sendOtp");
+//               } catch (err) {
+//                 console.error("Navigation error:", err);
+//               }
+//             }}
+//           >
+//             {(formikProps) => (
+//               <Form layout="vertical" onFinish={formikProps.handleSubmit}>
+//                 <Form.Item
+//                   label="Email Address"
+//                   validateStatus={formikProps.errors.email && formikProps.touched.email ? "error" : ""}
+//                   help={<ErrorMessage name="email" />}
+//                 >
+//                   <Input
+//                     name="email"
+//                     type="email"
+//                     placeholder="Enter your email"
+//                     value={formikProps.values.email}
+//                     onChange={formikProps.handleChange}
+//                     onBlur={formikProps.handleBlur}
+//                   />
+//                 </Form.Item>
+
+//                 {error && (
+//                   <div className="mb-3">
+//                     <Error>{error}</Error>
+//                   </div>
+//                 )}
+
+//                 <Form.Item>
+//                   <Button
+//                     type="primary"
+//                     htmlType="submit"
+//                     loading={loading}
+//                     block
+//                     style={{ backgroundColor: "#fa8c16", borderColor: "#fa8c16" }}
+//                   >
+//                     {loading ? <Spinner /> : "Send OTP"}
+//                   </Button>
+//                 </Form.Item>
+
+//                 <div className="text-center">
+//                   <Text type="secondary">
+//                     Don’t have an account?{" "}
+//                     <Link to="/signup">
+//                       <Text strong style={{ color: "#fa8c16" }}>
+//                         Sign up
+//                       </Text>
+//                     </Link>
+//                   </Text>
+//                 </div>
+//               </Form>
+//             )}
+//           </Formik>
+//         </Card>
+//       </div>
+//     </Layout>
+//   );
+// };
+
+// export default ForgotPassword;
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -474,7 +591,7 @@ const ForgotPassword = () => {
   }, [userInfo, dispatch, navigate]);
 
   return (
-    <Layout title="Bike-4-Rent : Forgot Password">
+    <Layout title="RideEase: Forgot Password">
       <div className="flex justify-center items-center min-h-screen bg-slate-100 px-4">
         <Card className="w-full max-w-md" bordered={false} style={{ borderRadius: "1rem" }}>
           <div className="text-center mb-6">
@@ -495,11 +612,19 @@ const ForgotPassword = () => {
             validationSchema={ValidateEmailOnly}
             onSubmit={async (values) => {
               try {
-                //await dispatch(sendOtp({ email: values.email }));
-                localStorage.setItem("resetEmail", values.email);
-                navigate("/sendOtp");
+                // ✅ FIXED: Send OTP to email
+                const result = await dispatch(sendOtp({ email: values.email }));
+                console.log('OTP Response:', result);
+                
+                if (result.error) {
+                  console.error('OTP Error:', result.payload);
+                } else {
+                  // Store email and navigate to OTP verification page
+                  localStorage.setItem("resetEmail", values.email);
+                  navigate("/sendOtp");
+                }
               } catch (err) {
-                console.error("Navigation error:", err);
+                console.error("Error:", err);
               }
             }}
           >
@@ -540,7 +665,7 @@ const ForgotPassword = () => {
 
                 <div className="text-center">
                   <Text type="secondary">
-                    Don’t have an account?{" "}
+                    Don't have an account?{" "}
                     <Link to="/signup">
                       <Text strong style={{ color: "#fa8c16" }}>
                         Sign up

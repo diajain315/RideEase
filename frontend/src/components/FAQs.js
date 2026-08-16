@@ -791,9 +791,9 @@ const FAQS = () => {
       icon: faInfoCircle,
       questions: [
         {
-          question: "What is Bike-4-Rent?",
+          question: "What is RideEase?",
           answer:
-            "Bike-4-Rent is a premium two-wheeler rental service that allows you to rent bikes with ease across the city.",
+            "RideEase is a premium two-wheeler rental service that allows you to rent bikes with ease across the city.",
         },
         {
           question: "What makes us special?",
@@ -801,7 +801,7 @@ const FAQS = () => {
             "We offer assured quality bikes, lowest prices, flexible rental options, and excellent customer support.",
         },
         {
-          question: "How does Bike-4-Rent work?",
+          question: "How does RideEase work?",
           answer:
             "You choose your bike, select dates, upload necessary documents, and pick up your ride at the designated location.",
         },

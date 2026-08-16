@@ -22,23 +22,27 @@ const Categories = () => {
 
 
   const { categories } = useSelector((state) => state.category);
-  const array = [
+  const fallbackCategories = [
     {
+      _id: "activa",
       name: "Activa",
       images: "/images/b1fleet.jpg",
       href: "/bikerentsection",
     },
     {
+      _id: "sport-bikes",
       name: "Sport bikes",
       images: "/images/b2fleet.jpg",
       href: "/bikerentsection",
     },
     {
+      _id: "jupiter",
       name: "Jupiter",
       images: "/images/b3fleet.jpg",
       href: "/bikerentsection",
     },
   ];
+  const fleetCategories = categories?.length ? categories : fallbackCategories;
 
   return (
     <div className="bg-gradient-to-b from-[#fff7f0] to-[#fde9dc] py-16 px-4">
@@ -57,28 +61,26 @@ const Categories = () => {
 
         {/* Fleet Cards */}
         <Row gutter={[24, 24]}>
-          {categories.map((item, index) => (
-            <Col xs={24} md={8} key={index}>
+          {fleetCategories.map((item) => (
+            <Col xs={24} md={8} key={item._id}>
               <Card
                 hoverable
                 className={`
                   w-full h-full
                   bg-[#8B4D3A] text-[#FFD9A0]
                   border border-[rgba(255,255,255,0.1)]
-                  rounded-xl overflow-hidden backdrop-blur-md
+                  rounded-lg overflow-hidden backdrop-blur-md
                   transition-all duration-300
                   hover:bg-[#733F30] hover:border-[#f59e0b]
                   hover:shadow-xl hover:-translate-y-1
                 `}
-                bodyStyle={{ padding: 24 }}
+                styles={{ body: { padding: 24 } }}
                 cover={
                   <div className="h-48 md:h-60 w-full overflow-hidden relative group">
                     <img
                       alt={item.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      src={`${base_url}/api/v1/category/category-photo/${item._id}`}
-                      placeholderSrc="https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png"
-                      effect="blur"
+                      src={item.images || `${base_url}/api/v1/category/category-photo/${item._id}`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-[#6c5049]/70 to-[#6c5049]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
@@ -90,7 +92,7 @@ const Categories = () => {
                 >
                   {item.name}
                 </Title>
-                <Link to={`/bikerentsection?category=${item._id}`}>
+                <Link to={item.href || `/bikerentsection?category=${item._id}`}>
                   <Button
                     type="primary"
                     icon={<ArrowRightOutlined />}

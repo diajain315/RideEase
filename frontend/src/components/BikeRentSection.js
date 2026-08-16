@@ -76,7 +76,7 @@ useEffect(() => {
   };
 
   return (
-    <Layout title="Bike-4-Rental">
+    <Layout title="RideEase">
       {/* Mobile Filter Button */}
       <div className="lg:hidden flex justify-center mb-4">
         <button

@@ -284,6 +284,169 @@
 
 // export default Login;
 
+// import React, { useEffect, useState } from "react";
+// import { Link, useNavigate, useLocation } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import Spinner from "../Helper/Spinner";
+// import { userLogin } from "../redux/features/User/authAction";
+// import { clearFields } from "../redux/features/User/authSlice";
+// import Layout from "./Layout";
+// import Error from "../Helper/Error";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faKey, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
+// import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+
+// const Login = () => {
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+//   const location = useLocation();
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const { loading, userInfo } = useSelector((state) => state.auth);
+//   const [errors, setErrors] = useState("");
+
+//   useEffect(() => {
+//     window.scrollTo({ top: 0, behavior: "smooth" });
+//   }, []);
+
+//   useEffect(() => {
+//     if (userInfo) {
+//       dispatch(clearFields());
+//       const locationState = location.state;
+//       if (locationState?.from) {
+//         navigate(locationState.from, { state: locationState.orderData });
+//       } else if (email === "djmgroup23@gmail.com") {
+//         navigate("/admin");
+//       } else {
+//         navigate("/");
+//       }
+//     }
+//   }, [userInfo, dispatch, navigate, location, email]);
+
+//   const onSubmit = async (event) => {
+//     event.preventDefault();
+//     const data = {
+//       email: email,
+//       password: password,
+//       role: email === "djmgroup23@gmail.com" ? 1 : 0,
+//     };
+//     const datas = await dispatch(userLogin(data));
+//     if (datas.error) {
+//       setErrors(datas.payload);
+//       dispatch(clearFields());
+//     }
+//   };
+
+//   return (
+//     <Layout title={"Bike-4-Rent : Login"}>
+//       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#fff7f0] via-[#fde9dc] to-[#f8d9c6] p-4 md:p-8">
+//         <div className="w-full max-w-md p-6 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl mb-10 transition-all duration-500 hover:shadow-2xl hover:bg-white">
+//           {/* Logo with enhanced hover effect */}
+//           <div className="flex flex-col items-center mb-1 p-0 group">
+//             <Link 
+//               to="/" 
+//               className="transition-all duration-500 hover:scale-105 hover:rotate-1"
+//             >
+//               <img
+//                 src="../images/BikeForRentFinalLogo.png"
+//                 alt="Bike-4-Rent Logo"
+//                 className="h-32 md:h-36 w-auto transition-transform duration-500 group-hover:drop-shadow-lg"
+//               />
+//             </Link>
+            
+//           </div>
+
+//           <h2 className="text-2xl md:text-3xl font-bold text-center text-[#5a4239]  mt-0 mb-6 p=0 transition-colors duration-500 group">
+//             <span className="inline-block group-hover:text-[#733F30] group-hover:drop-shadow-sm">
+//               Log in to your account
+//             </span>
+//           </h2>
+
+//           <form onSubmit={onSubmit} className="space-y-5">
+//             <div className="group">
+//               <label className="block text-sm md:text-base font-medium text-[#5a4239]/90 mb-2 transition-all duration-300 group-hover:text-[#733F30]">
+//                 Email address
+//               </label>
+//               <div className="relative transition-all duration-500 hover:scale-[1.01]">
+//                 <FontAwesomeIcon
+//                   icon={faEnvelope}
+//                   className="absolute left-3 top-3 text-[#A15E48] transition-all duration-300 group-hover:text-[#8B4D3A] group-hover:scale-110"
+//                 />
+//                 <input
+//                   type="email"
+//                   value={email}
+//                   onChange={(e) => setEmail(e.target.value)}
+//                   className="w-full pl-10 pr-3 py-2.5 border-2 border-[#DCA689]/70 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#733F30] focus:border-transparent transition-all duration-300 hover:border-[#A15E48] placeholder-[#A15E48]/50"
+//                   placeholder="your@email.com"
+//                   required
+//                 />
+//               </div>
+//             </div>
+
+//             <div className="group">
+//               <label className="block text-sm md:text-base font-medium text-[#5a4239]/90 mb-2 transition-all duration-300 group-hover:text-[#733F30]">
+//                 Password
+//               </label>
+//               <div className="relative transition-all duration-500 hover:scale-[1.01]">
+//                 <FontAwesomeIcon
+//                   icon={faKey}
+//                   className="absolute left-3 top-3 text-[#A15E48] transition-all duration-300 group-hover:text-[#8B4D3A] group-hover:scale-110"
+//                 />
+//                 <input
+//                   type="password"
+//                   value={password}
+//                   onChange={(e) => setPassword(e.target.value)}
+//                   className="w-full pl-10 pr-3 py-2.5 border-2 border-[#DCA689]/70 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#733F30] focus:border-transparent transition-all duration-300 hover:border-[#A15E48] placeholder-[#A15E48]/50"
+//                   placeholder="••••••••"
+//                   required
+//                 />
+//               </div>
+//               <div className="text-right mt-2 transition-all duration-300 hover:translate-x-1">
+//                 <Link
+//                   to="/sendOtp"
+//                   className="text-xs md:text-sm font-semibold text-[#8B4D3A] hover:text-[#5a4239] transition-all duration-300 hover:underline hover:underline-offset-4"
+//                 >
+//                   Forgot password?
+//                 </Link>
+//               </div>
+//             </div>
+
+//             {errors && <Error>{errors}</Error>}
+
+//             <button
+//               type="submit"
+//               className="w-full py-3 px-4 mt-6 bg-gradient-to-r from-[#8B4D3A] to-[#A15E48] text-white rounded-lg hover:from-[#733F30] hover:to-[#8B4D3A] focus:outline-none focus:ring-2 focus:ring-[#733F30] focus:ring-offset-2 transition-all duration-500 transform hover:scale-[1.02] active:scale-95 shadow-md hover:shadow-lg group"
+//               disabled={loading}
+//             >
+//               <span className="inline-block group-hover:translate-x-1 transition-transform duration-300">
+//                 {loading ? <Spinner /> : "Login"}
+//               </span>
+//             </button>
+//           </form>
+
+//           <div className="mt-8 text-center group">
+//             <p className="text-sm md:text-base text-[#5a4239]/80 mb-4 transition-all duration-300 group-hover:text-[#5a4239]">
+//               Don't have an account?
+//             </p>
+//             <Link
+//               to="/signup"
+//               className="inline-block w-full py-2.5 px-4 text-sm md:text-base font-medium bg-gradient-to-r from-[#A15E48] to-[#DCA689] text-white rounded-lg hover:from-[#8B4D3A] hover:to-[#A15E48] focus:outline-none focus:ring-2 focus:ring-[#5a4239] focus:ring-offset-2 transition-all duration-500 transform hover:scale-[1.02] active:scale-95 shadow-md hover:shadow-lg group"
+//             >
+//               <span className="inline-flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+//                 Create an account
+//                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+//                 </svg>
+//               </span>
+//             </Link>
+//           </div>
+//         </div>
+//       </div>
+//     </Layout>
+//   );
+// };
+
+// export default Login;
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -315,20 +478,19 @@ const Login = () => {
       const locationState = location.state;
       if (locationState?.from) {
         navigate(locationState.from, { state: locationState.orderData });
-      } else if (email === "djmgroup23@gmail.com") {
+      } else if (userInfo.role === 1) {
         navigate("/admin");
       } else {
         navigate("/");
       }
     }
-  }, [userInfo, dispatch, navigate, location, email]);
+  }, [userInfo, dispatch, navigate, location]);
 
   const onSubmit = async (event) => {
     event.preventDefault();
     const data = {
       email: email,
       password: password,
-      role: email === "djmgroup23@gmail.com" ? 1 : 0,
     };
     const datas = await dispatch(userLogin(data));
     if (datas.error) {
@@ -338,7 +500,7 @@ const Login = () => {
   };
 
   return (
-    <Layout title={"Bike-4-Rent : Login"}>
+    <Layout title={"RideEase : Login"}>
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#fff7f0] via-[#fde9dc] to-[#f8d9c6] p-4 md:p-8">
         <div className="w-full max-w-md p-6 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl mb-10 transition-all duration-500 hover:shadow-2xl hover:bg-white">
           {/* Logo with enhanced hover effect */}
@@ -349,14 +511,13 @@ const Login = () => {
             >
               <img
                 src="../images/BikeForRentFinalLogo.png"
-                alt="Bike-4-Rent Logo"
+                alt="RideEase Logo"
                 className="h-32 md:h-36 w-auto transition-transform duration-500 group-hover:drop-shadow-lg"
               />
             </Link>
-            
           </div>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-[#5a4239]  mt-0 mb-6 p=0 transition-colors duration-500 group">
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-[#5a4239] mt-0 mb-6 transition-colors duration-500 group">
             <span className="inline-block group-hover:text-[#733F30] group-hover:drop-shadow-sm">
               Log in to your account
             </span>

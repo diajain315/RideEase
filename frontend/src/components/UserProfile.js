@@ -96,7 +96,7 @@ const UserProfile = () => {
 
   if (loading || !userInfo) {
     return (
-      <Layout title="Bike-4-Rent : Profile Loading">
+      <Layout title="RideEase : Profile Loading">
         <div className="flex justify-center items-center min-h-[calc(100vh-80px)]">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#8B4D3A]"></div>
         </div>
@@ -105,7 +105,7 @@ const UserProfile = () => {
   }
 
   return (
-    <Layout title="Bike-4-Rent : User Profile">
+    <Layout title="RideEase : User Profile">
       <div className="flex items-center justify-center min-h-[calc(100vh-80px)] bg-gradient-to-br from-[#fff7f0] via-[#fde9dc] to-[#f8d9c6] py-8 px-4">
         {/* Card container with proper spacing */}
         <div className="w-full max-w-md p-6 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg">

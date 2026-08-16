@@ -210,14 +210,14 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#5a4239] text-[#fff7f0]">
+    <footer className="bg-[#3f281f] text-[#fff7f0]">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo and Description */}
           <div className="space-y-4">
             <div className="flex items-center">
-              <FontAwesomeIcon icon={faBiking} className="text-[#DCA689] text-3xl mr-2" />
-              <Title level={4} className="!text-[#fff7f0] !m-0">Bike4Rent</Title>
+              <FontAwesomeIcon icon={faBiking} className="text-[#FFD9A0] text-3xl mr-2" />
+              <Title level={4} className="!text-[#fff7f0] !m-0">RideEase</Title>
             </div>
             <Text className="text-[#DCA689]">
               Experience the freedom of two-wheeled exploration with premium bikes in the heart of Udaipur.
@@ -229,7 +229,7 @@ const Footer = () => {
                   href={social.href} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-[#A15E48] hover:text-[#DCA689] transition-colors duration-300"
+                  className="text-[#DCA689] hover:text-[#fff7f0] transition-colors duration-300"
                 >
                   <FontAwesomeIcon icon={social.icon} size="lg" />
                 </a>
@@ -273,7 +273,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="flex flex-col md:flex-row justify-between items-center">
           <Text className="text-[#DCA689] text-sm">
-            © {new Date().getFullYear()} BikeForRent. All rights reserved.
+            Copyright {new Date().getFullYear()} BikeForRent. All rights reserved.
           </Text>
           <div className="flex space-x-4 mt-4 md:mt-0">
             {/* <Link to="/termsc" className="text-[#DCA689] hover:text-[#fff7f0] text-sm transition-colors duration-300">
@@ -282,7 +282,7 @@ const Footer = () => {
             <Link to="/termsc" className="text-[#DCA689] hover:text-[#fff7f0] text-sm transition-colors duration-300">
               Terms of Service
             </Link>
-            <Link to="/FAQs" className="text-[#DCA689] hover:text-[#fff7f0] text-sm transition-colors duration-300">
+            <Link to="/faqs" className="text-[#DCA689] hover:text-[#fff7f0] text-sm transition-colors duration-300">
               FAQ
             </Link>
           </div>

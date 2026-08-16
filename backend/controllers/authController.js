@@ -779,6 +779,7 @@ export const sendOtpController = async (req, res) => {
 
     user.otp = { code: otp, expiry };
     await user.save();
+    console.log('✅ OTP saved:', user.otp); 
     console.log(user);
     await sendOtpEmail(email, otp);
 
@@ -907,6 +908,7 @@ export const userProfileController = async (req, res) => {
         _id: user._id,
         gender: user.gender,
         phone: user.phone,
+        role: user.role
       },
       message: "User info fetched successfully",
     });

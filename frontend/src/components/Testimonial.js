@@ -101,6 +101,8 @@ const Testimonial = () => {
 
   // Helper function to split reviews into chunks
   const chunkReviews = (arr, chunkSize) => {
+    if (!arr.length || chunkSize < 1) return [];
+
     const chunks = [];
     for (let i = 0; i < arr.length; i += chunkSize) {
       chunks.push(arr.slice(i, i + chunkSize));
@@ -110,13 +112,12 @@ const Testimonial = () => {
 
   // Divide reviews into 3 groups
   const reviewChunks = chunkReviews(reviews, Math.ceil(reviews.length / 3));
-  console.log('113:', reviewChunks);
 
   return (
-    <section className="bg-orange-50 text-gray-700 body-font flex-wrap justify-center">
+    <section className="bg-[#fff7f0] text-gray-700 body-font flex-wrap justify-center">
       <div className="container px-5 py-8 mx-auto mb-3">
         <Divider className="!h-1 !w-24 !min-w-0 !mx-auto !my-0 !mb-4 bg-gradient-to-r from-[#5a4239] to-orange-900" />
-        <h2 className="!text-4xl !font-bold !text-orange-900 flex items-center justify-center gap-3 !mb-2 !mt-4">
+        <h2 className="!text-3xl sm:!text-4xl !font-bold !text-orange-900 flex items-center justify-center gap-3 !mb-2 !mt-4 text-center">
           <FontAwesomeIcon
             icon={faComments}
             className="mr-3 text-3xl sm:text-4xl text-orange-900"
@@ -124,15 +125,16 @@ const Testimonial = () => {
           Our Testimonials
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10">
-          {reviewChunks.map((chunk, chunkIndex) => (
-            <Carousel autoplay key={chunkIndex} className="mx-auto w-[20rem] sm:w-[25rem]">
+        {reviewChunks.length ? (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-10">
+            {reviewChunks.map((chunk, chunkIndex) => (
+            <Carousel autoplay key={chunkIndex} className="mx-auto w-full max-w-sm">
               {chunk.map((review, index) => (
-                <div className="px-4 py-8 mb-8 border-2 rounded-lg shadow-md bg-[#FFE7C5] border-gray-200" key={index}>
+                <div className="px-4 py-8 mb-8 border rounded-lg shadow-md bg-[#FFE7C5] border-[#DCA689]/70" key={index}>
                   <div className="flex flex-col items-center justify-center text-center">
                     <img
                       alt="testimonial"
-                      className="nline-block object-cover object-center w-20 h-20 mb-6 bg-gray-100 border-4 border-orange-900 rounded-full shadow-sm"
+                      className="inline-block object-cover object-center w-20 h-20 mb-6 bg-gray-100 border-4 border-orange-900 rounded-full shadow-sm"
                       src="/images/testimonials/avatar.jpg"
                     />
                     <p className="mb-4 text-sm text-[#5a4239] leading-relaxed">" {review.message} "</p>
@@ -165,8 +167,15 @@ const Testimonial = () => {
                 </div>
               ))}
             </Carousel>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="mx-auto mt-10 max-w-xl rounded-lg border border-[#DCA689]/70 bg-white p-6 text-center shadow-sm">
+            <p className="text-[#5a4239]">
+              Reviews will appear here as soon as customers start sharing their rides.
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

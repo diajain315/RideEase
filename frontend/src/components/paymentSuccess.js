@@ -30,7 +30,7 @@ const PaymentSuccess = () => {
       <Result
         status="success"
         title="Payment Successful!"
-        subTitle="Thank you for renting with Bike4Rent Udaipur."
+        subTitle="Thank you for renting with RideEase Udaipur."
       />
       <div style={{ marginTop: "30px" }}>
         <AddReviewForm />

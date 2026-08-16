@@ -62,7 +62,8 @@ const App1 = () => {
   return (
     <>
       <Suspense fallback={<Loading />}>
-      {userInfo?.role !== 1 && <Navbar scrolled={scrolled} />}
+      {/* {userInfo?.role !== 1 && <Navbar scrolled={scrolled} />} */}
+      <Navbar scrolled={scrolled} />
 
         <div className="mt-16 bg-slate-50 min-h-screen">
           <Routes>
@@ -111,7 +112,8 @@ const App1 = () => {
             <Route path="*" element={<Unauthorized />} />
           </Routes>
         </div>
-        {userInfo?.role !== 1 && <Footer />}
+        {/* {userInfo?.role !== 1 && <Footer />} */}
+        <Footer />
       </Suspense>
     </>
   );

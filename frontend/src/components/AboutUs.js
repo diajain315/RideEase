@@ -590,7 +590,7 @@ const AboutUs = () => {
             Our Mission
           </h2>
           <p className="text-[#5a4239] leading-relaxed">
-            At Bike-4-Rent, we aim to provide the best rental experience for all
+            At RideEase, we aim to provide the best rental experience for all
             our customers, ensuring safety, affordability, and convenience.
           </p>
           <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-4 sm:space-y-0">

@@ -21,7 +21,7 @@ const OrderDropdown = ({ color }) => {
   }, [dispatch]);
   
   return (
-    <Layout title={"Bike-4-Rent : Your Orders"}>
+    <Layout title={"RideEase: Your Orders"}>
       <div className="flex items-center justify-center">
         <h1 className="font-serif text-2xl font-bold">Your Orders</h1>
       </div>

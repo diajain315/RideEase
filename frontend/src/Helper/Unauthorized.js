@@ -18,7 +18,7 @@ const Unauthorized = () => {
               className='px-8 font-semibold underline rounded cursor-pointer dark:bg-violet-400 dark:text-gray-900'
             >
               Back to homepage
-            </Link>
+            </Link>      
           </div>
         </div>
       </section>

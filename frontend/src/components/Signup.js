@@ -29,7 +29,7 @@ const Signup = () => {
   }, [success]);
 
   return (
-    <Layout title={"Bike-4-Rent : Signup"}>
+    <Layout title={"RideEase : Signup"}>
       <div className="flex items-center justify-center min-h-[calc(100vh-80px)] bg-gradient-to-br from-[#fff7f0] via-[#fde9dc] to-[#f8d9c6] py-8 px-4">
         {/* Card container with proper spacing */}
         <div className="w-full max-w-md p-6 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg">
@@ -39,7 +39,7 @@ const Signup = () => {
             <Link to="/" className="transition-transform duration-300 hover:scale-105">
               <img
                 src="../images/BikeForRentFinalLogo.png"
-                alt="Bike-4-Rent Logo"
+                alt="RideEase Logo"
                 className="h-20 w-auto"
               />
             </Link>
